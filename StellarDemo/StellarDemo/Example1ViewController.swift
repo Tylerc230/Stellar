@@ -21,39 +21,37 @@ class Example1ViewController: UIViewController {
         self.title = "Basic"
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesBegan(touches, withEvent: event)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
         
-        let point = touches.first?.locationInView(self.view)
+        let point = touches.first?.location(in: self.view)
         
-        for (index,ball) in balls.enumerate() {
+        for (index,ball) in balls.enumerated() {
             let center = ball.center
             let interval = 0.1 * Double(index)
             
-            center.animateTo(point!,
+            center.animate(to: point!,
                              duration: 0.8,
                              delay: interval,
-                             type: .SwiftOut,
-                             autoreverses:  true,
+                             type: .swiftOut,
                              render: { (p) in
                                 
-                                ball.center = p
+                            ball.center = p
                                 
                 }, completion: { (f) in
                  
-                    ball.backgroundColor?.animateTo(UIColor.redColor(),
-                        duration: 0.5,
-                        delay: interval,
-                        type: .EaseIn,
+                    ball.backgroundColor?.animate(to: UIColor.red,
+                        duration: 1.4,
+                        type: .swiftOut,
                         autoreverses: true,
-                        repeatCount: 2,
                         render: { (c) in
                             
                         ball.backgroundColor = c
                     })
                     
-                    ball.center.snapTo(center, damping: 0.3,render: { (c) in
-                        ball.center = c
+                    ball.center.snap(to: center, damping: 0.1
+                        , render: { (p) in
+                            ball.center = p
                     })
             })
         }

@@ -9,9 +9,5 @@
 import UIKit
 
 public protocol GravityConfigurable: BasicChainable {
-    func gravity(magnitude: Double) -> GravityConfigurable
-}
-
-public protocol GravityConfigurable1: BasicChainable1 {
-    func gravity(magnitude: Double) -> GravityConfigurable1
+    func gravity(_ magnitude: Double) -> Self
 }
